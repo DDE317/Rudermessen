@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rudermesser</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0d1117" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Rudermesser" />
+</head>
+<body>
+
+    <header>
+        <h1>✈ Rudermesser</h1>
+        <div class="header-right">
+            <span id="statusDot" class="status-dot disconnected"></span>
+            <span id="statusText">Nicht verbunden</span>
+            <button id="connectBtn" class="btn btn-connect">Verbinden</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Grafische Ruderanzeige -->
+        <section class="card visual-card">
+            <div class="rudder-scene">
+                <!-- Flugzeug-Rumpf (statisch) -->
+                <svg id="rudderSvg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+
+                    <!-- Hintergrund Gitterlinien -->
+                    <line x1="150" y1="0"   x2="150" y2="200" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="0"   y1="100" x2="300" y2="100" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
+
+                    <!-- Grad-Markierungen -->
+                    <text x="152" y="18"  fill="#8b949e" font-size="10">+</text>
+                    <text x="152" y="195" fill="#8b949e" font-size="10">−</text>
+
+                    <!-- Scharnierachse (fester Punkt) -->
+                    <circle cx="150" cy="100" r="6" fill="#58a6ff" />
+                    <circle cx="150" cy="100" r="2" fill="#0d1117" />
+
+                    <!-- Fixe Fläche (Flosse) -->
+                    <rect x="60" y="88" width="90" height="24" rx="4"
+                          fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+                    <text x="105" y="104" text-anchor="middle" fill="#8b949e" font-size="11">Flosse</text>
+
+                    <!-- Bewegliches Ruder (dreht sich um Scharnierachse) -->
+                    <g id="rudderGroup" transform="rotate(0, 150, 100)">
+                        <!-- Ruderblatt -->
+                        <rect x="150" y="88" width="80" height="24" rx="4"
+                              fill="#58a6ff" fill-opacity="0.85" stroke="#58a6ff" stroke-width="1.5"/>
+                        <!-- Pfeil am Ende -->
+                        <polygon points="230,100 220,92 220,108"
+                                 fill="#58a6ff"/>
+                        <text x="190" y="104" text-anchor="middle" fill="#0d1117" font-size="11" font-weight="bold">Ruder</text>
+                    </g>
+
+                    <!-- Winkel-Bogen -->
+                    <path id="anglePath" d="" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+                    <!-- Winkel-Label -->
+                    <text id="angleLabel" x="175" y="78" fill="#d29922" font-size="11" text-anchor="middle">0.0°</text>
+
+                </svg>
+            </div>
+        </section>
+
+        <!-- Zahlenwerte -->
+        <section class="card display-card">
+            <div class="values-row">
+                <div class="value-box">
+                    <span class="label">Ausschlag</span>
+                    <span id="deflectionValue" class="value-big">--</span>
+                    <span class="unit">mm</span>
+                </div>
+                <div class="divider"></div>
+                <div class="value-box">
+                    <span class="label">Winkel</span>
+                    <span id="angleValue" class="value-mid">--</span>
+                    <span class="unit">°</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESET Knopf -->
+        <section class="card reset-card">
+            <button id="resetBtn" class="btn btn-reset" disabled>
+                ⟳ NULLPUNKT SETZEN
+            </button>
+            <p class="hint">Ruder in Neutralstellung → Knopf drücken → misst ab dieser Position</p>
+        </section>
+
+        <!-- Richtungsbalken -->
+        <section class="card arrow-card">
+            <div class="arrow-bar">
+                <div id="arrowFill" class="arrow-fill"></div>
+                <div class="arrow-center"></div>
+            </div>
+            <div class="arrow-labels">
+                <span>− Ausschlag</span>
+                <span>Neutral</span>
+                <span>+ Ausschlag</span>
+            </div>
+        </section>
+
+        <!-- Einstellungen -->
+        <section class="card settings-card">
+            <h2>Einstellungen</h2>
+
+            <div class="setting-row">
+                <label for="leverInput">Abstand Scharnier → Gehäusevorderkante (mm)</label>
+                <div class="input-row">
+                    <input type="number" id="leverInput" min="0" max="500" step="0.5" value="50" />
+                    <button class="btn btn-send" id="sendLeverBtn" disabled>Senden</button>
+                </div>
+                <small>+ 23 mm Chip-Offset → Hebelarm gesamt: <strong id="totalLever">73.0</strong> mm</small>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
