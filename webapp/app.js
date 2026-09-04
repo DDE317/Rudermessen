@@ -151,27 +151,25 @@ function onDisconnected() {
 }
 
 // ── Grafische Ruderanzeige ────────────────────────────────────────────────────
-// SVG: Scharnierachse bei cx=150, cy=100
+// SVG: Scharnierachse bei cx=150, cy=110
 // rudderGroup dreht sich um diesen Punkt
 
 function updateRudderGraphic(angleDeg) {
-    // Ruder drehen (CSS transform über SVG)
-    rudderGroup.setAttribute('transform', `rotate(${angleDeg}, 150, 100)`);
+    // Ruder dreht sich um Scharnierachse (150, 110)
+    rudderGroup.setAttribute('transform', `rotate(${angleDeg}, 150, 110)`);
 
     // Winkel-Label
     angleLabel.textContent = angleDeg.toFixed(1) + '°';
 
-    // Winkel-Bogen zeichnen (kleiner Kreisbogen zur Visualisierung)
+    // Winkel-Bogen zeichnen
     if (Math.abs(angleDeg) > 0.5) {
-        const r       = 35;
-        const cx      = 150, cy = 100;
-        const startRad = 0;                          // 0° = Ruder neutral (rechts)
-        const endRad   = angleDeg * Math.PI / 180;
-
-        const x1 = cx + r * Math.cos(startRad);
-        const y1 = cy + r * Math.sin(startRad);
-        const x2 = cx + r * Math.cos(endRad);
-        const y2 = cy + r * Math.sin(endRad);
+        const r      = 40;
+        const cx     = 150, cy = 110;
+        const x1     = cx + r;  // Startpunkt bei 0° (rechts)
+        const y1     = cy;
+        const endRad = angleDeg * Math.PI / 180;
+        const x2     = cx + r * Math.cos(endRad);
+        const y2     = cy + r * Math.sin(endRad);
 
         const largeArc = Math.abs(angleDeg) > 180 ? 1 : 0;
         const sweep    = angleDeg > 0 ? 1 : 0;
@@ -180,16 +178,16 @@ function updateRudderGraphic(angleDeg) {
             `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} ${sweep} ${x2} ${y2}`
         );
 
-        // Label-Position leicht versetzt
+        // Label neben dem Bogen
         const midRad = endRad / 2;
-        const lx = cx + (r + 14) * Math.cos(midRad);
-        const ly = cy + (r + 14) * Math.sin(midRad);
+        const lx = cx + (r + 18) * Math.cos(midRad);
+        const ly = cy + (r + 18) * Math.sin(midRad);
         angleLabel.setAttribute('x', lx);
         angleLabel.setAttribute('y', ly);
     } else {
         anglePath.setAttribute('d', '');
-        angleLabel.setAttribute('x', 175);
-        angleLabel.setAttribute('y', 78);
+        angleLabel.setAttribute('x', 195);
+        angleLabel.setAttribute('y', 90);
     }
 }
 

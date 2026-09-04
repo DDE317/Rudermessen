@@ -26,42 +26,42 @@
         <!-- Grafische Ruderanzeige -->
         <section class="card visual-card">
             <div class="rudder-scene">
-                <!-- Flugzeug-Rumpf (statisch) -->
-                <svg id="rudderSvg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                <svg id="rudderSvg" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
 
-                    <!-- Hintergrund Gitterlinien -->
-                    <line x1="150" y1="0"   x2="150" y2="200" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
-                    <line x1="0"   y1="100" x2="300" y2="100" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
+                    <!-- Hintergrund -->
+                    <!-- Mittellinie (Neutral) -->
+                    <line x1="0" y1="110" x2="300" y2="110" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
 
-                    <!-- Grad-Markierungen -->
-                    <text x="152" y="18"  fill="#8b949e" font-size="10">+</text>
-                    <text x="152" y="195" fill="#8b949e" font-size="10">−</text>
+                    <!-- Grad-Markierungen rechts -->
+                    <text x="285" y="40"  fill="#8b949e" font-size="9" text-anchor="middle">+30°</text>
+                    <text x="285" y="113" fill="#8b949e" font-size="9" text-anchor="middle">0°</text>
+                    <text x="285" y="185" fill="#8b949e" font-size="9" text-anchor="middle">−30°</text>
+                    <line x1="270" y1="36"  x2="270" y2="185" stroke="#30363d" stroke-width="1"/>
 
-                    <!-- Scharnierachse (fester Punkt) -->
-                    <circle cx="150" cy="100" r="6" fill="#58a6ff" />
-                    <circle cx="150" cy="100" r="2" fill="#0d1117" />
-
-                    <!-- Fixe Fläche (Flosse) -->
-                    <rect x="60" y="88" width="90" height="24" rx="4"
+                    <!-- Fixe Flosse (Seitenansicht, horizontal) -->
+                    <rect x="30" y="98" width="120" height="24" rx="5"
                           fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
-                    <text x="105" y="104" text-anchor="middle" fill="#8b949e" font-size="11">Flosse</text>
+                    <text x="90" y="114" text-anchor="middle" fill="#8b949e" font-size="11">Flosse</text>
 
-                    <!-- Bewegliches Ruder (dreht sich um Scharnierachse) -->
-                    <g id="rudderGroup" transform="rotate(0, 150, 100)">
-                        <!-- Ruderblatt -->
-                        <rect x="150" y="88" width="80" height="24" rx="4"
-                              fill="#58a6ff" fill-opacity="0.85" stroke="#58a6ff" stroke-width="1.5"/>
-                        <!-- Pfeil am Ende -->
-                        <polygon points="230,100 220,92 220,108"
-                                 fill="#58a6ff"/>
-                        <text x="190" y="104" text-anchor="middle" fill="#0d1117" font-size="11" font-weight="bold">Ruder</text>
+                    <!-- Scharnierachse -->
+                    <circle cx="150" cy="110" r="7" fill="#58a6ff"/>
+                    <circle cx="150" cy="110" r="3" fill="#0d1117"/>
+
+                    <!-- Bewegliches Ruder - dreht sich um Scharnierachse nach oben/unten -->
+                    <g id="rudderGroup">
+                        <!-- Ruderblatt (von Scharnier nach rechts) -->
+                        <rect x="150" y="98" width="100" height="24" rx="5"
+                              fill="#58a6ff" fill-opacity="0.9" stroke="#58a6ff" stroke-width="1.5"/>
+                        <text x="200" y="114" text-anchor="middle" fill="#0d1117" font-size="11" font-weight="bold">Ruder</text>
+                        <!-- Pfeilspitze rechts -->
+                        <polygon points="250,110 238,101 238,119" fill="#3d8fe0"/>
                     </g>
 
-                    <!-- Winkel-Bogen -->
-                    <path id="anglePath" d="" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="3,3"/>
+                    <!-- Winkel-Bogen (gelb) -->
+                    <path id="anglePath" d="" fill="none" stroke="#d29922" stroke-width="2" stroke-dasharray="3,3"/>
 
                     <!-- Winkel-Label -->
-                    <text id="angleLabel" x="175" y="78" fill="#d29922" font-size="11" text-anchor="middle">0.0°</text>
+                    <text id="angleLabel" x="195" y="90" fill="#d29922" font-size="12" text-anchor="middle" font-weight="bold">0.0°</text>
 
                 </svg>
             </div>
