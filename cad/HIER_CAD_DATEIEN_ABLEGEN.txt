@@ -1,0 +1,14 @@
+Hier kommen die CAD-Dateien für das Gehäuse rein.
+
+Unterstützte Formate:
+- .stl  (zum Drucken)
+- .step / .stp  (universelles CAD-Format)
+- .f3d  (Fusion 360)
+- .3mf
+
+Nach dem Reinkopieren im Terminal hochladen:
+  git add cad/
+  git commit -m "CAD Dateien"
+  git push
+
+Diese Textdatei kannst du dann löschen.

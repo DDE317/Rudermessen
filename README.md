@@ -108,13 +108,14 @@ Rudder Messen/
 ├── platformio.ini     PlatformIO Konfiguration (Board, Bibliotheken)
 ├── src/
 │   └── main.cpp       Arduino Firmware (IMU auslesen, BLE senden)
-└── webapp/            Web-App (PWA)
-    ├── index.html
-    ├── style.css
-    ├── app.js
-    ├── manifest.json
-    ├── service-worker.js
-    └── icon-192.png / icon-512.png
+├── webapp/            Web-App (PWA)
+│   ├── index.html
+│   ├── style.css
+│   ├── app.js
+│   ├── manifest.json
+│   ├── service-worker.js
+│   └── icon-192.png / icon-512.png
+└── cad/               3D-Gehäuse (STL / STEP zum Drucken)
 ```
 
 ---
