@@ -123,8 +123,6 @@ main {
 
 #rudderGroup {
     transition: transform 0.08s linear;
-    transform-origin: 150px 100px; /* Scharnierachse */
-    transform-box: fill-box;
 }
 
 /* ── Zahlenwerte ─────────────────────────────────────────────────────────────── */
