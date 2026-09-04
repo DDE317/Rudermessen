@@ -1,5 +1,6 @@
 // Service Worker - Cache First Strategie
-const CACHE_NAME = 'rudermesser-v4';
+const CACHE_NAME = 'rudermesser-v5';
+const VERSION = '5';
 
 const FILES_TO_CACHE = [
     './',
@@ -20,28 +21,26 @@ self.addEventListener('install', event => {
     );
 });
 
-// Aktivierung - alten Cache sofort löschen
+// Aktivierung - alten Cache sofort löschen und übernehmen
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(keys =>
             Promise.all(
-                keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+                keys.filter(k => k !== CACHE_NAME).map(k => {
+                    console.log('Lösche alten Cache:', k);
+                    return caches.delete(k);
+                })
             )
         ).then(() => self.clients.claim())
     );
 });
 
-// Fetch - IMMER zuerst aus Cache, kein Netzwerk nötig
+// Fetch - IMMER zuerst aus Cache
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request).then(cached => {
-            if (cached) {
-                return cached; // aus Cache laden
-            }
-            // Nur wenn nicht im Cache: Netzwerk versuchen
-            return fetch(event.request).catch(() => {
-                return caches.match('./index.html');
-            });
+            if (cached) return cached;
+            return fetch(event.request).catch(() => caches.match('./index.html'));
         })
     );
 });
