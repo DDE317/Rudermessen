@@ -1,5 +1,5 @@
 // Service Worker - Cache First Strategie
-const CACHE_NAME = 'rudermesser-v3';
+const CACHE_NAME = 'rudermesser-v4';
 
 const FILES_TO_CACHE = [
     './',
