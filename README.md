@@ -4,6 +4,8 @@ Misst den Ruderausschlag eines Modellflugzeugs in Millimetern und zeigt ihn live
 
 ![Platform](https://img.shields.io/badge/Platform-Arduino%20Nano%2033%20BLE-blue) ![Sensor](https://img.shields.io/badge/Sensor-LSM9DS1-green)
 
+<img src="Page.jpg" width="350" alt="Rudermesser App"/>
+
 ---
 
 ## Was macht das Projekt?
